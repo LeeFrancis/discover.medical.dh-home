@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
-import MicroFrontEnd from "./mfe";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
-const drugDetailHost = "http://localhost:3012";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -30,10 +28,21 @@ function TabPanel(props) {
   );
 }
 
-function App(props) {
+class App extends React.Component {
+  render() {
+    return (
+      <>
+       <AppScaffold {...this.props}/>
+    </>);
+  }
+}
+
+function AppScaffold(props){
   const [value, setValue] = React.useState(0);
+  //let history = props.history;
 
   const handleChange = (event, newValue) => {
+    //history.push(newValue);
     setValue(newValue);
   };
 
@@ -49,24 +58,33 @@ function App(props) {
           <Tab label="Drug Detail" />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <MicroFrontEnd
-          id="left-home"
-          name="DrugDetail"
-          host={drugDetailHost}
-          targetContainer="dh-home-left"
-        />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <MicroFrontEnd
-          id="right-home"
-          name="DrugDetail"
-          host={drugDetailHost}
-          targetContainer="dh-home-right"
-        />
-      </TabPanel>
+      <TabPanel value={value} index={0}></TabPanel>
+      <TabPanel value={value} index={1}></TabPanel>
     </div>
   );
 }
 
 export default App;
+
+/*
+// <MicroFrontEnd
+//   id="left-home"
+//   name="DrugDetail"
+//   host={drugDetailHost}
+//   targetContainer="dh-home-left"
+//   history={history}
+// />
+        // <MicroFrontEnd
+        //   id="right-home"
+        //   name="DrugDetail"
+        //   host={drugDetailHost}
+        //   targetContainer="dh-home-right"
+        //   history={history}
+        //   data={{
+        //     html:
+        //       "<h4>This is data passed via props</h4><div>but not in a good way.. Have to work on this</div>"
+        //   }}
+        // />
+
+
+*/

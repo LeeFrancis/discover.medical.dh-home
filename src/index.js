@@ -3,11 +3,10 @@ import ReactDOM from "react-dom";
 //import "./index.css";
 import AppContainer from "./App";
 
-window.renderDHHome = (containerId, history) => {
-  ReactDOM.render(
-    <AppContainer history={history} />,
-    document.getElementById(containerId)
-  );
+window.renderDHHome = (history, containerId) => {
+  return (containerId ?
+    ReactDOM.render(<AppContainer history={history} />,document.getElementById(containerId)) :
+    <AppContainer history={history} />);
 };
 window.unmountDHHome = containerId => {
   const el = document.getElementById(containerId);
