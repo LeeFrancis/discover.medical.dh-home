@@ -5,7 +5,8 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import MicroFrontEnd from "./mfe-component/MicroFrontEnd";
-const dmxHomeHost = "http://localhost:3012/";
+//import { useHistory } from "react-router-dom";
+const drugDetailHost = process.env.REACT_APP_DRUG_DETAIL;
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,7 +50,8 @@ const getActiveMfe = (rendered, activeTab) => {
           target="left-home"
           mfeHost={{
             name: "DrugDetail",
-            host: dmxHomeHost
+            host: drugDetailHost
+            //path: process.env.REACT_APP_DRUG_DETAIL_PATH
           }}
         />
       );
@@ -60,7 +62,8 @@ const getActiveMfe = (rendered, activeTab) => {
           target="right-home"
           mfeHost={{
             name: "DrugDetail",
-            host: dmxHomeHost
+            host: drugDetailHost
+            //path: process.env.REACT_APP_DRUG_DETAIL_PATH
           }}
         />
       );
@@ -76,16 +79,18 @@ function AppScaffold(props) {
   useEffect(() => {
     setRendered(true);
   }, [rendered]);
+  // let history = useHistory();
 
   const handleChange = (event, newValue) => {
-    //history.push(newValue);
+    // if (history) {
+    //   history.push(newValue);
+    // }
     setRendered(false);
     setActiveTab(newValue);
   };
 
   return (
     <div id="dh-home">
-      (
       <AppBar position="static">
         <Tabs
           value={activeTab}
