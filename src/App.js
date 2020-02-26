@@ -5,7 +5,7 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import MicroFrontEnd from "./mfe-component/MicroFrontEnd";
-//import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 const drugDetailHost = process.env.REACT_APP_DRUG_DETAIL;
 
 function TabPanel(props) {
@@ -28,16 +28,6 @@ function TabPanel(props) {
       {value === index && <Box p={3}>{children}</Box>}
     </Typography>
   );
-}
-
-class App extends React.Component {
-  render() {
-    return (
-      <>
-        <AppScaffold {...this.props} />
-      </>
-    );
-  }
 }
 
 const getActiveMfe = (rendered, activeTab) => {
@@ -72,19 +62,16 @@ const getActiveMfe = (rendered, activeTab) => {
   }
 };
 
-function AppScaffold(props) {
+function App(props) {
   const [activeTab, setActiveTab] = React.useState(0);
   const [rendered, setRendered] = React.useState(false);
 
   useEffect(() => {
     setRendered(true);
   }, [rendered]);
-  // let history = useHistory();
-
+  let history = useHistory();
   const handleChange = (event, newValue) => {
-    // if (history) {
-    //   history.push(newValue);
-    // }
+    history.push(`/${newValue}`);
     setRendered(false);
     setActiveTab(newValue);
   };

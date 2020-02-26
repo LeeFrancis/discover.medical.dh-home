@@ -1,15 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-//import "./index.css";
 import AppContainer from "./App";
+import { BrowserRouter } from "react-router-dom";
 
-window.renderDHHome = (history, containerId) => {
+window.renderDHHome = containerId => {
   return containerId ? (
     ReactDOM.render(
-      <AppContainer history={history} />,
+      <BrowserRouter>
+        <AppContainer />
+      </BrowserRouter>,
       document.getElementById(containerId)
     )
   ) : (
-    <AppContainer />
+    <BrowserRouter>
+      <AppContainer />
+    </BrowserRouter>
   );
 };
