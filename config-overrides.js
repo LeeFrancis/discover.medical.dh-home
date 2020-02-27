@@ -8,6 +8,7 @@ module.exports = (config, env) => {
   config.externals = {
     react: "React",
     "react-dom": "ReactDOM",
+    "react-router-dom": "ReactRouterDOM",
     "material-ui": /@material-ui\/core\/.*/
   };
   return config;

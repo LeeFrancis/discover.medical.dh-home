@@ -65,11 +65,11 @@ const getActiveMfe = (rendered, activeTab) => {
 function App(props) {
   const [activeTab, setActiveTab] = React.useState(0);
   const [rendered, setRendered] = React.useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     setRendered(true);
   }, [rendered]);
-  let history = useHistory();
   const handleChange = (event, newValue) => {
     history.push(`/${newValue}`);
     setRendered(false);
