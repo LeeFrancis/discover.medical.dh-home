@@ -60,13 +60,17 @@ const getMountNode = (store, id, mfeHost) => {
 const removeMountNode = (store, id) => {
   const record = store[id];
 
-  record.inUse = false;
+  if (record) {
+    record.inUse = false;
 
-  setTimeout(() => {
-    if (!store[id].inUse) {
-      ReactDOM.unmountComponentAtNode(store[id].container);
-    }
-  }, 0);
+    setTimeout(() => {
+      if (!store[id].inUse) {
+        ReactDOM.unmountComponentAtNode(store[id].container);
+      }
+    }, 0);
+  } else {
+    console.log(`MFE: For some reason this isnt mounted - ${id}`);
+  }
 };
 
 export default class MicroFrontEnd extends Component {
