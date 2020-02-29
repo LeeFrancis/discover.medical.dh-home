@@ -1,10 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
-//import "./index.css";
-import AppContainer from "./App";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import { BrowserRouter as Router } from "react-router-dom";
 
-window.renderDHHome = (history, containerId) => {
-  return (containerId ?
-    ReactDOM.render(<AppContainer history={history} />,document.getElementById(containerId)) :
-    <AppContainer history={history} />);
+window.renderDHHome = containerId => {
+  return containerId ? (
+    ReactDOM.render(
+      <Router>
+        <App />
+      </Router>,
+      document.getElementById(containerId)
+    )
+  ) : (
+    <App />
+  );
 };
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
