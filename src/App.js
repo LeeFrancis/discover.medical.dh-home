@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import MicroFrontEnd from "./mfe-component/MicroFrontEnd";
 import { useHistory, useLocation, useParams } from "react-router-dom";
+import ToolBarSearch from "./ToolBarSearch";
 const drugDetailHost = process.env.REACT_APP_DRUG_DETAIL;
 
 function TabPanel(props) {
@@ -68,6 +69,7 @@ const WrappedTabPanels = React.memo(
   ({ activeTab, rendered }) => {
     return (
       <>
+        <ToolBarSearch />
         <TabPanel value={activeTab} index={0} key={0}>
           This is the left tab
           <div id="left-home" />
