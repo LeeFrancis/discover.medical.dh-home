@@ -4,20 +4,17 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router } from "react-router-dom";
-import { MFEContext } from "./mfe-component/context";
 
-window.renderDHHome = arg => {
-  return arg && typeof arg === "string" ? (
+window.renderDHHome = container => {
+  return container ? (
     ReactDOM.render(
       <Router>
         <App />
       </Router>,
-      document.getElementById(arg)
+      document.getElementById(container)
     )
   ) : (
-    <MFEContext.Provider value={{ mfeManager: arg }}>
-      <App />
-    </MFEContext.Provider>
+    <App />
   );
 };
 

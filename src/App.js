@@ -4,9 +4,14 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import MicroFrontEnd from "./mfe-component/MicroFrontEnd";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import ToolBarSearch from "./ToolBarSearch";
+import {
+  MicroFrontEnd,
+  MFEManager,
+  MFEContext
+} from "discover.medical.shared-mfe-lib";
+
 const drugDetailHost = process.env.REACT_APP_DRUG_DETAIL;
 
 function TabPanel(props) {
@@ -94,6 +99,7 @@ const App = props => {
   const [rendered, setRendered] = React.useState(false);
   const history = useHistory();
   const location = useLocation();
+  const { mfeManager = new MFEManager({ noParent: true }) } = props;
 
   useEffect(() => {
     setRendered(true);
@@ -105,19 +111,21 @@ const App = props => {
   };
 
   return (
-    <div id="dh-home" key="1">
-      <AppBar position="static">
-        <Tabs
-          value={activeTab}
-          onChange={handleChange}
-          aria-label="simple tabs example"
-        >
-          <Tab label="Drug Summary" />
-          <Tab label="Drug Detail" />
-        </Tabs>
-      </AppBar>
-      <WrappedTabPanels activeTab={activeTab} rendered={rendered} />
-    </div>
+    <MFEContext.Provider value={{ mfeManager }}>
+      <div id="dh-home" key="1">
+        <AppBar position="static">
+          <Tabs
+            value={activeTab}
+            onChange={handleChange}
+            aria-label="simple tabs example"
+          >
+            <Tab label="Drug Summary" />
+            <Tab label="Drug Detail" />
+          </Tabs>
+        </AppBar>
+        <WrappedTabPanels activeTab={activeTab} rendered={rendered} />
+      </div>
+    </MFEContext.Provider>
   );
 };
 
