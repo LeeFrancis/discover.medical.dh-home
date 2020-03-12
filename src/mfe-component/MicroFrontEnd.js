@@ -49,13 +49,7 @@ export default class MicroFrontEnd extends Component {
       return ReactDOM.createPortal(<div>{this.error}</div>, this.el);
     }
     return ReactDOM.createPortal(
-      this.mountNode ? (
-        <MFEContext.Provider value={{ mfeManager: this.context.mfeManager }}>
-          {this.mountNode}
-        </MFEContext.Provider>
-      ) : (
-        loadingChild()
-      ),
+      this.mountNode ? this.mountNode : loadingChild(),
       this.el
     );
   }
